@@ -1,0 +1,2 @@
+# ludocpp
+Ludo in c++
