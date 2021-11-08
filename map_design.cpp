@@ -3,10 +3,12 @@
 #include <cstdlib>
 #include <conio.h>
 #include <time.h>
+#include <chrono>
+#include <thread>
 using namespace std;
-
+char fields[40] = { ' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
 char diceTab[7] = { ' ',' ',' ',' ',' ',' ',' ' };
-void dice(int x, char diceTab[7]){
+void fillDice(int x, char diceTab[7]){
 	switch (x) {
 	case 0:
 		diceTab[0] = ' ';
@@ -73,11 +75,12 @@ void dice(int x, char diceTab[7]){
 		break;
 	}
 }
-void roll() {
+int roll() {
 	int x;
 	srand(time(NULL));
 	x = (std::rand() % 6) + 1;
-	dice(x, diceTab);
+	fillDice(x, diceTab);
+	return x;
 }
 
 void map(){
@@ -89,21 +92,21 @@ color = GetStdHandle(STD_OUTPUT_HANDLE);
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout <<"\t\t    .___________."<<endl << "\t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[18] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[19] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[20] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "\t\t    |---|---|---|" << endl;
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout<<"\t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[17] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_INTENSITY);
@@ -111,7 +114,7 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[21] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl;
 
@@ -144,7 +147,7 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 
 cout<<"\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[16] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_INTENSITY);
@@ -152,7 +155,7 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[22] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 
@@ -167,7 +170,7 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 
 cout << endl << "\t\t    |---|---|---|"<<endl << "    \t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[15] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_INTENSITY);
@@ -175,28 +178,28 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[23] << " ";
 // LEFT AND RIGHT WING... ------------------------------------------------------------------------------------------------------    LEFT AND RIGHT WING...
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "    ._______________|---|---|---|_______________." << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_INTENSITY); 
-cout << "   ";
+cout << " " << fields[10] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[11] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[12] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[13] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[14] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_INTENSITY);
@@ -204,23 +207,23 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[24] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[25] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[26] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[27] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[28] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 // DICE -----------------------------------------------------------------------------------------------------------         DICE
@@ -238,7 +241,7 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 // ...LEFT AND RIGHT WING... ---------------------------------------------------------------------------------------------------------    ...LEFT AND RIGHT WING...
 cout << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[9] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_INTENSITY);
@@ -274,7 +277,7 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[29] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 // DICE --------------------------------------------------------------------------------------------------------     DICE
@@ -285,23 +288,23 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 // ...LEFT AND RIGHT WING ---------------------------------------------------------------------------------------------------------    ...LEFT AND RIGHT WING
 cout<< endl << "    |---|---|---|---|---|---|---|---|---|---|---|" << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[8] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[7] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[6] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[5] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[4] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
@@ -309,30 +312,30 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[34] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[33] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[32] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[31] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_GREEN | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[30] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout<<"|" << endl << "    ^---------------|---|---|---|---------------^" << endl << "\t\t    |";
 
 // DOWNER WING... -----------------------------------------------------------------------------------------------------------     DOWNER WING...
 
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[3] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
@@ -340,11 +343,11 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[35] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "\t\t    |---|---|---|" << endl << "\t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[2] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
@@ -352,7 +355,7 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[36] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout<<"|";
 //  UPPER YELOW BASE -------------------------------------------------------------------------------------------------------------      UPPER YELOW BASE
@@ -385,7 +388,7 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 
 cout << "\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[1] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
@@ -393,7 +396,7 @@ cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[37] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 
@@ -407,24 +410,46 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 
 cout << endl << "\t\t    |---|---|---|" << endl << "    \t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[0] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " " << fields[39] << " ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-cout << "   ";
+cout << " "<< fields[38]<<" ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "\t\t    ^-----------^" << endl;
 }
 int main()
-{
+{   /* numery planszy(zamien fields z char na int)
+	for (int i = 0; i < 40; i++)
+	{
+		fields[i] = i;
+	}
+	*/
+	map();
 	cout << "Press any key to start...";
+	int x = 0;
+	int poz = 0;
 	while (true) {
 		_getch();
-		roll();
+		fillDice(4, diceTab);
 		map();
+		std::this_thread::sleep_for(std::chrono::milliseconds(150));
+		fillDice(6, diceTab);
+		map();
+		std::this_thread::sleep_for(std::chrono::milliseconds(150));
+		fillDice(0, diceTab);
+		map();
+		std::this_thread::sleep_for(std::chrono::milliseconds(150));
+		fields[poz] = ' ';
+		x = roll();
+		poz += x;
+		fields[poz] = 'o';
+		
+		map();
+		cout << "wylosowano: " << x;
 	}
 }
