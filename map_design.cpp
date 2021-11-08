@@ -1,16 +1,91 @@
 #include<iostream>
 #include <windows.h>
 #include <cstdlib>
+#include <conio.h>
+#include <time.h>
 using namespace std;
 
-int main()
-{
+char diceTab[7] = { ' ',' ',' ',' ',' ',' ',' ' };
+void dice(int x, char diceTab[7]){
+	switch (x) {
+	case 0:
+		diceTab[0] = ' ';
+		diceTab[1] = ' ';
+		diceTab[2] = ' ';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = ' ';
+		diceTab[6] = ' ';
+		break;
+	case 1:
+		diceTab[0] = '*';
+		diceTab[1] = ' ';
+		diceTab[2] = ' ';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = ' ';
+		diceTab[6] = ' ';
+		break;
+	case 2:
+		diceTab[0] = ' ';
+		diceTab[1] = '*';
+		diceTab[2] = ' ';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = ' ';
+		diceTab[6] = '*';
+		break;
+	case 3:
+		diceTab[0] = '*';
+		diceTab[1] = '*';
+		diceTab[2] = ' ';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = ' ';
+		diceTab[6] = '*';
+		break;
+	case 4:
+		diceTab[0] = ' ';
+		diceTab[1] = '*';
+		diceTab[2] = '*';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = '*';
+		diceTab[6] = '*';
+		break;
+	case 5:
+		diceTab[0] = '*';
+		diceTab[1] = '*';
+		diceTab[2] = '*';
+		diceTab[3] = ' ';
+		diceTab[4] = ' ';
+		diceTab[5] = '*';
+		diceTab[6] = '*';
+		break;
+	case 6:
+		diceTab[0] = ' ';
+		diceTab[1] = '*';
+		diceTab[2] = '*';
+		diceTab[3] = '*';
+		diceTab[4] = '*';
+		diceTab[5] = '*';
+		diceTab[6] = '*';
+		break;
+	}
+}
+void roll() {
+	int x;
+	srand(time(NULL));
+	x = (std::rand() % 6) + 1;
+	dice(x, diceTab);
+}
+
+void map(){
+	system("cls");
 system("COLOR 7B");
 HANDLE color;
 color = GetStdHandle(STD_OUTPUT_HANDLE);
-
 // UPPER WING... -------------------------------------------------------------------------------------------------------------   UPPER WING...
-
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout <<"\t\t    .___________."<<endl << "\t\t    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
@@ -101,11 +176,7 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
-
-//------------------------------------------------------------------------------------------------------------------------------
-// LEFT AND RIGHT WING ---------------------------------------------------------------------------------------------------------    LEFT AND RIGHT WING
-//------------------------------------------------------------------------------------------------------------------------------
-
+// LEFT AND RIGHT WING... ------------------------------------------------------------------------------------------------------    LEFT AND RIGHT WING...
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "    ._______________|---|---|---|_______________." << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_INTENSITY); 
@@ -151,7 +222,21 @@ cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
-cout << "|" << endl << "    |---|---|---|---|---|---|---|---|---|---|---|" << endl << "    |";
+cout << "|";
+// DICE -----------------------------------------------------------------------------------------------------------         DICE
+cout << "\t\t";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+cout << "  "<<diceTab[1] << " " << diceTab[2] << "  ";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+// ...LEFT AND RIGHT WING... ---------------------------------------------------------------------------------------------------------    ...LEFT AND RIGHT WING...
+cout << endl << "    |---|---|---|---|---|---|---|---|---|---|---|";
+// DICE -----------------------------------------------------------------------------------------------------------         DICE
+cout << "\t\t";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+cout << "  " << diceTab[3] << diceTab[0] << diceTab[4] << "  ";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+// ...LEFT AND RIGHT WING... ---------------------------------------------------------------------------------------------------------    ...LEFT AND RIGHT WING...
+cout << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
@@ -191,7 +276,14 @@ cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
-cout << "|" << endl << "    |---|---|---|---|---|---|---|---|---|---|---|" << endl << "    |";
+cout << "|";
+// DICE --------------------------------------------------------------------------------------------------------     DICE
+cout << "\t\t";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+cout << "  " << diceTab[5] << " " << diceTab[6] << "  ";
+SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+// ...LEFT AND RIGHT WING ---------------------------------------------------------------------------------------------------------    ...LEFT AND RIGHT WING
+cout<< endl << "    |---|---|---|---|---|---|---|---|---|---|---|" << endl << "    |";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
@@ -262,7 +354,7 @@ cout << "|";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
-
+cout<<"|";
 //  UPPER YELOW BASE -------------------------------------------------------------------------------------------------------------      UPPER YELOW BASE
 
 cout << endl<<"    ";
@@ -279,6 +371,7 @@ cout << "  \t    |---|---|---|";
 cout << "       ";
 SetConsoleTextAttribute(color, FOREGROUND_GREEN | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
 cout << "| O | O |" << endl;
+
 
 // DOWNER YELLOW BASE -------------------------------------------------------------------------------------------------------------       DOWNER YELLOW BASE
 
@@ -325,4 +418,13 @@ SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BL
 cout << "   ";
 SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 cout << "|" << endl << "\t\t    ^-----------^" << endl;
+}
+int main()
+{
+	cout << "Press any key to start...";
+	while (true) {
+		_getch();
+		roll();
+		map();
+	}
 }
