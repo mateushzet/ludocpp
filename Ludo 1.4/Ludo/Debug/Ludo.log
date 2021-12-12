@@ -1,0 +1,6 @@
+﻿  map.cpp
+C:\Users\mateu\source\repos\Ludo\Ludo\map.cpp(113,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\mateu\source\repos\Ludo\Ludo\map.cpp(791,55): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\source\repos\Ludo\Ludo\map.cpp(792,53): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\source\repos\Ludo\Ludo\map.cpp(1064): warning C4715: "print_active”: niewszystkie ścieżki kodu zwracają wartość
+  Ludo.vcxproj -> C:\Users\mateu\source\repos\Ludo\Debug\Ludo.exe
