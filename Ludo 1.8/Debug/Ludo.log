@@ -1,0 +1,3 @@
+﻿  map.cpp
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1023,6): warning C4101: "which_pawn": lokalna zmienna, do której nie istnieje odwołanie
+  Ludo.vcxproj -> C:\Users\mateu\Desktop\Ludo 1.8\Debug\Ludo.exe
