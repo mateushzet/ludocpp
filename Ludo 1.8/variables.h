@@ -1,7 +1,6 @@
 #include <string>
 #ifndef variables_h
 #define variables_h
-#pragma once
 using std::string;
 class Variables {
 	public:

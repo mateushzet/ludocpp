@@ -1,3 +1,9 @@
 ﻿  map.cpp
-C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1023,6): warning C4101: "which_pawn": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1046,6): warning C4101: "which_pawn": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1592,27): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1609,28): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1627,29): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1644,30): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1661,8): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\mateu\Desktop\Ludo 1.8\map.cpp(1019): warning C4715: "move_pawn”: niewszystkie ścieżki kodu zwracają wartość
   Ludo.vcxproj -> C:\Users\mateu\Desktop\Ludo 1.8\Debug\Ludo.exe

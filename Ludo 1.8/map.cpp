@@ -19,6 +19,8 @@ int colorChangeMeta[4] = { -2,-2,-2,-2 };
 int colorChangeMeta2[4] = { -2,-2,-2,-2 };
 int colorId[4] = { 0,1,2,3 };
 
+int bonus_history = 0;
+
 int playersOnTabs[40] = { 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9 };
 int pawnsOnTabs[40] = { 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9 };
 int playerTurn;
@@ -264,9 +266,24 @@ void map() {
 	system("COLOR 7B");
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	/*	
+	SetConsoleTextAttribute(color, FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+	/*
 		//debuging informations
+	cout << "inBase = " << red.inBase << " | inEnded = " << red.ended << "| finalFields: " << red.final_fields[0] << red.final_fields[1] << red.final_fields[2] << red.final_fields[3] << endl << " P0: " << "inBase:" << red.pawns[0]->inBase << " inFinal:" << red.pawns[0]->inFinal << " ended:" << red.pawns[0]->ended << " position:" << red.pawns[0]->position << endl << " P1: " << "inBase:" << red.pawns[1]->inBase << " inFinal:" << red.pawns[1]->inFinal << " ended:" << red.pawns[1]->ended << " position:" << red.pawns[1]->position << endl << " P2: " << "inBase:" << red.pawns[2]->inBase << " inFinal:" << red.pawns[2]->inFinal << " ended:" << red.pawns[2]->ended << " position:" << red.pawns[2]->position << endl << " P3: " << "inBase:" << red.pawns[3]->inBase << " inFinal:" << red.pawns[3]->inFinal << " ended:" << red.pawns[3]->ended << " position:" << red.pawns[3]->position << endl;
+	cout << "inBase = " << blue.inBase << " | inEnded = " << blue.ended << "| finalFields: " << blue.final_fields[0] << blue.final_fields[1] << blue.final_fields[2] << blue.final_fields[3] << endl << " P0: " << "inBase:" << blue.pawns[0]->inBase << " inFinal:" << blue.pawns[0]->inFinal << " ended:" << blue.pawns[0]->ended << " position:" << blue.pawns[0]->position << endl << " P1: " << "inBase:" << blue.pawns[1]->inBase << " inFinal:" << blue.pawns[1]->inFinal << " ended:" << blue.pawns[1]->ended << " position:" << blue.pawns[1]->position << endl << " P2: " << "inBase:" << blue.pawns[2]->inBase << " inFinal:" << blue.pawns[2]->inFinal << " ended:" << blue.pawns[2]->ended << " position:" << blue.pawns[2]->position << endl << " P3: " << "inBase:" << blue.pawns[3]->inBase << " inFinal:" << blue.pawns[3]->inFinal << " ended:" << blue.pawns[3]->ended << " position:" << blue.pawns[3]->position << endl;
+	cout << "inBase = " << green.inBase << " | inEnded = " << green.ended << "| finalFields: " << green.final_fields[0] << green.final_fields[1] << green.final_fields[2] << green.final_fields[3] << endl << " P0: " << "inBase:" << green.pawns[0]->inBase << " inFinal:" << green.pawns[0]->inFinal << " ended:" << green.pawns[0]->ended << " position:" << green.pawns[0]->position << endl << " P1: " << "inBase:" << green.pawns[1]->inBase << " inFinal:" << green.pawns[1]->inFinal << " ended:" << green.pawns[1]->ended << " position:" << green.pawns[1]->position << endl << " P2: " << "inBase:" << green.pawns[2]->inBase << " inFinal:" << green.pawns[2]->inFinal << " ended:" << green.pawns[2]->ended << " position:" << green.pawns[2]->position << endl << " P3: " << "inBase:" << green.pawns[3]->inBase << " inFinal:" << green.pawns[3]->inFinal << " ended:" << green.pawns[3]->ended << " position:" << green.pawns[3]->position << endl;
+	cout << "inBase = " << yellow.inBase << " | inEnded = " << yellow.ended << "| finalFields: " << yellow.final_fields[0] << yellow.final_fields[1] << yellow.final_fields[2] << yellow.final_fields[3] << endl << " P0: " << "inBase:" << yellow.pawns[0]->inBase << " inFinal:" << yellow.pawns[0]->inFinal << " ended:" << yellow.pawns[0]->ended << " position:" << yellow.pawns[0]->position << endl << " P1: " << "inBase:" << yellow.pawns[1]->inBase << " inFinal:" << yellow.pawns[1]->inFinal << " ended:" << yellow.pawns[1]->ended << " position:" << yellow.pawns[1]->position << endl << " P2: " << "inBase:" << yellow.pawns[2]->inBase << " inFinal:" << yellow.pawns[2]->inFinal << " ended:" << yellow.pawns[2]->ended << " position:" << yellow.pawns[2]->position << endl << " P3: " << "inBase:" << yellow.pawns[3]->inBase << " inFinal:" << yellow.pawns[3]->inFinal << " ended:" << yellow.pawns[3]->ended << " position:" << yellow.pawns[3]->position << endl;
+	cout << endl;
+	for(int i = 0; i<40; i++) {
+		cout<<playersOnTabs[i]<<" | ";
+	}
+
+	cout << endl;
+
+	for (int i = 0; i < 40; i++) {
+
+		cout << pawnsOnTabs[i] << " | ";
+	}	
 		SetConsoleTextAttribute(color, FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN)
 		cout << "inBase = " << red.inBase << " | inEnded = " << red.ended << "| finalFields: " << red.final_fields[0] << red.final_fields[1] << red.final_fields[2] << red.final_fields[3] << endl << " P0: " << "inBase:" << red.pawns[0]->inBase << " inFinal:" << red.pawns[0]->inFinal << " ended:" << red.pawns[0]->ended << " position:" << red.pawns[0]->position << endl << " P1: " << "inBase:" << red.pawns[1]->inBase << " inFinal:" << red.pawns[1]->inFinal << " ended:" << red.pawns[1]->ended << " position:" << red.pawns[1]->position << endl << " P2: " << "inBase:" << red.pawns[2]->inBase << " inFinal:" << red.pawns[2]->inFinal << " ended:" << red.pawns[2]->ended << " position:" << red.pawns[2]->position << endl << " P3: " << "inBase:" << red.pawns[3]->inBase << " inFinal:" << red.pawns[3]->inFinal << " ended:" << red.pawns[3]->ended << " position:" << red.pawns[3]->position << endl;
 	*/
@@ -889,8 +906,8 @@ bool ifEndTab(Player* player, int which_pawn, int x){
 }
 
 // change pawn position
-void changePosition(Player* player, int which_pawn, int x){
-
+bool changePosition(Player* player, int which_pawn, int x){
+	bool take = false;
 	if ((!goingToFinal(player, which_pawn, x) || !isInFinal(player, which_pawn, x)) 
 		&& fields[((player->pawns[which_pawn])->position)+x] != '8' 
 		&& (player->pawns[which_pawn])->inFinal == 0 && !((((player->pawns[which_pawn])->position + x) > player->meta
@@ -913,7 +930,7 @@ void changePosition(Player* player, int which_pawn, int x){
 				playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->pawns[pawnsOnTabs[player->pawns[which_pawn]->position]]->inBase = 1;
 				playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->pawns[pawnsOnTabs[player->pawns[which_pawn]->position]]->position = -1;
 				playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->inBase++;
-
+				take = true;
 				for (int i = 0; i < 40; i++){
 
 					playersOnTabs[i] = 9;
@@ -925,6 +942,7 @@ void changePosition(Player* player, int which_pawn, int x){
 			else fields[(player->pawns[which_pawn])->position] = '8';
 		}
 	}
+	return take;
 }
 
 // displaying leaderboard
@@ -972,7 +990,7 @@ bool pawnsCantMove(Player* player, int x) {
 }
 
 // whole procedure of moving pawn
-void move_pawn(Player* player, int which_pawn, int x) {
+bool move_pawn(Player* player, int which_pawn, int x) {
 	if (goingToFinal(player, which_pawn, x) || isInFinal(player, which_pawn, x)) {
 	
 		if (goingToFinal(player, which_pawn, x)){ // going to final
@@ -987,7 +1005,7 @@ void move_pawn(Player* player, int which_pawn, int x) {
 			player->inFinal++;
 			ending(player, which_pawn, x);
 		}
-		else{ // is in final  error isInfinal position 3 dice 1 correct should = 1(not printed)
+		else{
 	
 			(player->final_fields[((player->pawns[which_pawn])->position)]) = ' ';
 			((player->pawns[which_pawn])->position) = (((player->pawns[which_pawn])->position) + x);
@@ -996,7 +1014,7 @@ void move_pawn(Player* player, int which_pawn, int x) {
 	}
 	else {
 		
-		changePosition(player, which_pawn, x);
+		return changePosition(player, which_pawn, x);
 	}
 }
 
@@ -1005,6 +1023,11 @@ void header(Player* player) {
 
 	HANDLE msgColor;
 	msgColor = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (player->id == 0)SetConsoleTextAttribute(msgColor, 0 | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN);
+	else if (player->id == 1)SetConsoleTextAttribute(msgColor, 0 | BACKGROUND_RED | BACKGROUND_INTENSITY);
+	else if (player->id == 2)SetConsoleTextAttribute(msgColor, 0 | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+	else SetConsoleTextAttribute(msgColor, 0 | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+	cout << "   ";
 	if (player->id == 1)
 		SetConsoleTextAttribute(msgColor, FOREGROUND_RED | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 	if (player->id == 2)
@@ -1013,7 +1036,7 @@ void header(Player* player) {
 		SetConsoleTextAttribute(msgColor, FOREGROUND_GREEN | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 	if (player->id == 0)
 		SetConsoleTextAttribute(msgColor, FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
-	cout << nameTab[player->id] << " TURN\n";
+	cout << nameTab[player->id] << " TURN" << endl;
 	SetConsoleTextAttribute(msgColor, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
 }
 
@@ -1138,16 +1161,15 @@ int print_active(Player* player, int x) {
 	if (printedTest[3] == 0){
 
 		if (printedTest[2] == 1)line = 2;
-		else line = 1;
+		else if (printedTest[1] == 1)line = 1;
+		else line = 0;
 	}
 
 	int chose;
-	bool direction;
 
 	do {
 		system("cls");
 		map();
-		printed = 0;
 		for (int i = 3; i >= 0; i--){
 
 			if (correct[i] == 1){
@@ -1157,12 +1179,25 @@ int print_active(Player* player, int x) {
 					if (havePartner[i] == 1) xSwitch = banedPartner[i]; else xSwitch = i;
 
 					if (line == i){
-
-						SetConsoleTextAttribute(color, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY | 0);
+						cout << "  ";
+						if(i==0) SetConsoleTextAttribute(color, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+						else if(i==1) SetConsoleTextAttribute(color, 0);
+						else if(i==2) SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_GREEN);
+						else SetConsoleTextAttribute(color, BACKGROUND_RED | BACKGROUND_BLUE);
 						cout << "[  ]";
+						grayBackground(color);
 						if (havePartner[i] == 1) cout << " - " << i + 1 << " or " << banedPartner[i] + 1 << endl;
-						else cout << " - " << i + 1 << endl;
+						else cout << " - " << i + 1;
+						cout << "   ";
+						if (player->id == 0)SetConsoleTextAttribute(color, 0 | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN);
+						else if (player->id == 1)SetConsoleTextAttribute(color, 0 | BACKGROUND_RED | BACKGROUND_INTENSITY);
+						else if (player->id == 2)SetConsoleTextAttribute(color, 0 | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+						else (color, 0 | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+						cout << "<--";
+						grayBackground(color);
+						cout << " " << endl;
 						printed++;
+						chose = i;
 					}
 					else {
 						switch (xSwitch) {
@@ -1204,96 +1239,55 @@ int print_active(Player* player, int x) {
 				}
 			}
 		}
-
-		chose = _getch();
 		
-		switch (chose){
+			
+			chose = _getch();
 
-		case 72:
-			if (line < 3)line++; else line = 0;
-			direction = 1;
-			break;
+			switch (chose) {
 
-		case 80:
-			if (line > 0)line--; else line = 3;
-			direction = 0;
-			break;
+			case 72:
+				if (line < 3)
+				{
+					if (printedTest[line + 1] == 1) line++;
+					else if (printedTest[line + 2] == 1 && line < 2) line += 2;
+					else if (printedTest[line + 3] == 1 && line < 1) line += 3;
+				}
 
-		case 119:
-			if (line < 3)line++; else line = 0;
-			direction = 1;
-			break;
 
-		case 115:
-			if (line > 0)line--; else line = 3;
-			direction = 0;
-			break;
+				break;
 
-		default:
-			break;
-		}
+			case 80:
+				if (line > 0)
+				{
+					if (printedTest[line - 1] == 1) line--;
+					else if (printedTest[line - 2] == 1 && line > 1) line-=2;
+					else if (printedTest[line - 3] == 1 && line > 2) line-=3;
+				}
+				break;
 
-		if (direction = 1) {
+			case 119:
+				if (line < 3)
+				{
+					if (printedTest[line + 1] == 1) line++;
+					else if (printedTest[line + 2] == 1 && line < 2) line+=2;
+					else if (printedTest[line + 3] == 1 && line < 1) line+=3;
+				}
+				break;
 
-			if (printedTest[0] == 0 && line == 0){
+			case 115:
+				if (line > 0)
+				{
+					if (printedTest[line - 1] == 1) line--;
+					else if (printedTest[line - 2] == 1 && line > 1) line -= 2;
+					else if (printedTest[line - 3] == 1 && line > 2) line -= 3;
+				}
+				break;
 
-				if (printedTest[1] == 1)	line = 1;
-				else if (printedTest[2] == 1)	line = 2;
-				else if (printedTest[3] == 1)	line = 3;
+			default:
+				break;
 			}
-
-			if (printedTest[1] == 0 && line == 1){
-
-				if (printedTest[2] == 1)	line = 2;
-				else if (printedTest[3] == 1)	line = 3;
-				else if (printedTest[0] == 1)	line = 0;
-			}
-
-			if (printedTest[2] == 0 && line == 2){
-
-				if (printedTest[3] == 1)	line = 3;
-				else if (printedTest[0] == 1)	line = 0;
-				else if (printedTest[2] == 1)	line = 2;
-			}
-
-			if (printedTest[3] == 0 && line == 3){
-
-				if (printedTest[0] == 1)	line = 0;
-				else if (printedTest[1] == 1)	line = 1;
-				else if (printedTest[2] == 1)	line = 2;
-			}
-		}
-		else {
-
-			if (printedTest[0] == 0 && line == 0){
-
-				if (printedTest[3] == 1)	line = 3;
-				else if (printedTest[2] == 1)	line = 2;
-				else if (printedTest[1] == 1)	line = 1;
-			}
-
-			if (printedTest[1] == 0 && line == 1){
-
-				if (printedTest[0] == 1)	line = 0;
-				else if (printedTest[3] == 1)	line = 3;
-				else if (printedTest[2] == 1)	line = 2;
-			}
-
-			if (printedTest[2] == 0 && line == 2){
-
-				if (printedTest[1] == 1)	line = 1;
-				else if (printedTest[0] == 1)	line = 0;
-				else if (printedTest[3] == 1)	line = 3;
-			}
-
-			if (printedTest[3] == 0 && line == 3){
-
-				if (printedTest[2] == 1)	line = 2;
-				else if (printedTest[1] == 1)	line = 1;
-				else if (printedTest[0] == 1)	line = 0;
-			}
-		}
-	} while (chose != 13 && chose != 32);
+			
+		} while (chose != 13 && chose != 32);
 
 	// change colors to pawns //
 	for (int j = 0; j <= 3; j++){
@@ -1329,41 +1323,51 @@ int print_active(Player* player, int x) {
 	return line;
 }
 
-// take pawn from the board
-void takePawn(int which_pawn,Player* player) {
-
-	if (playersOnTabs[(player->pawns[which_pawn])->position] != 9 && playersOnTabs[(player->pawns[which_pawn])->position] != player->id){
-
-		playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->pawns[pawnsOnTabs[player->pawns[which_pawn]->position]]->inBase = 1;
-		playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->pawns[pawnsOnTabs[player->pawns[which_pawn]->position]]->position = -1;
-		playersTab[playersOnTabs[player->pawns[which_pawn]->position]]->inBase++;
-		
-		for (int i = 0; i < 40; i++){
-			playersOnTabs[i] = 9;
-			pawnsOnTabs[i] = 9;
-		}	
-	}
-	fields[(player->pawns[which_pawn])->position] = 'O';
-}
-
 // whole procedure of player turn
-void turn(Player* player){
+bool turn(Player* player) {
 
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	for (int j = 0; j < 4; j++){
+	cout << "inBase = " << red.inBase << " | inEnded = " << red.ended << "| finalFields: " << red.final_fields[0] << red.final_fields[1] << red.final_fields[2] << red.final_fields[3] << endl << " P0: " << "inBase:" << red.pawns[0]->inBase << " inFinal:" << red.pawns[0]->inFinal << " ended:" << red.pawns[0]->ended << " position:" << red.pawns[0]->position << endl << " P1: " << "inBase:" << red.pawns[1]->inBase << " inFinal:" << red.pawns[1]->inFinal << " ended:" << red.pawns[1]->ended << " position:" << red.pawns[1]->position << endl << " P2: " << "inBase:" << red.pawns[2]->inBase << " inFinal:" << red.pawns[2]->inFinal << " ended:" << red.pawns[2]->ended << " position:" << red.pawns[2]->position << endl << " P3: " << "inBase:" << red.pawns[3]->inBase << " inFinal:" << red.pawns[3]->inFinal << " ended:" << red.pawns[3]->ended << " position:" << red.pawns[3]->position << endl;
+	cout << "inBase = " << blue.inBase << " | inEnded = " << blue.ended << "| finalFields: " << blue.final_fields[0] << blue.final_fields[1] << blue.final_fields[2] << blue.final_fields[3] << endl << " P0: " << "inBase:" << blue.pawns[0]->inBase << " inFinal:" << blue.pawns[0]->inFinal << " ended:" << blue.pawns[0]->ended << " position:" << blue.pawns[0]->position << endl << " P1: " << "inBase:" << blue.pawns[1]->inBase << " inFinal:" << blue.pawns[1]->inFinal << " ended:" << blue.pawns[1]->ended << " position:" << blue.pawns[1]->position << endl << " P2: " << "inBase:" << blue.pawns[2]->inBase << " inFinal:" << blue.pawns[2]->inFinal << " ended:" << blue.pawns[2]->ended << " position:" << blue.pawns[2]->position << endl << " P3: " << "inBase:" << blue.pawns[3]->inBase << " inFinal:" << blue.pawns[3]->inFinal << " ended:" << blue.pawns[3]->ended << " position:" << blue.pawns[3]->position << endl;
+	cout << "inBase = " << green.inBase << " | inEnded = " << green.ended << "| finalFields: " << green.final_fields[0] << green.final_fields[1] << green.final_fields[2] << green.final_fields[3] << endl << " P0: " << "inBase:" << green.pawns[0]->inBase << " inFinal:" << green.pawns[0]->inFinal << " ended:" << green.pawns[0]->ended << " position:" << green.pawns[0]->position << endl << " P1: " << "inBase:" << green.pawns[1]->inBase << " inFinal:" << green.pawns[1]->inFinal << " ended:" << green.pawns[1]->ended << " position:" << green.pawns[1]->position << endl << " P2: " << "inBase:" << green.pawns[2]->inBase << " inFinal:" << green.pawns[2]->inFinal << " ended:" << green.pawns[2]->ended << " position:" << green.pawns[2]->position << endl << " P3: " << "inBase:" << green.pawns[3]->inBase << " inFinal:" << green.pawns[3]->inFinal << " ended:" << green.pawns[3]->ended << " position:" << green.pawns[3]->position << endl;
+	cout << "inBase = " << yellow.inBase << " | inEnded = " << yellow.ended << "| finalFields: " << yellow.final_fields[0] << yellow.final_fields[1] << yellow.final_fields[2] << yellow.final_fields[3] << endl << " P0: " << "inBase:" << yellow.pawns[0]->inBase << " inFinal:" << yellow.pawns[0]->inFinal << " ended:" << yellow.pawns[0]->ended << " position:" << yellow.pawns[0]->position << endl << " P1: " << "inBase:" << yellow.pawns[1]->inBase << " inFinal:" << yellow.pawns[1]->inFinal << " ended:" << yellow.pawns[1]->ended << " position:" << yellow.pawns[1]->position << endl << " P2: " << "inBase:" << yellow.pawns[2]->inBase << " inFinal:" << yellow.pawns[2]->inFinal << " ended:" << yellow.pawns[2]->ended << " position:" << yellow.pawns[2]->position << endl << " P3: " << "inBase:" << yellow.pawns[3]->inBase << " inFinal:" << yellow.pawns[3]->inFinal << " ended:" << yellow.pawns[3]->ended << " position:" << yellow.pawns[3]->position << endl;
+	cout << endl;
+	for (int i = 0; i < 40; i++) {
+		cout << playersOnTabs[i] << " | ";
+	}
 
-		for (int i = 0; i < 4; i++){
+	cout << endl;
 
-			if (playersTab[j]->pawns[i]->inBase == 0 && playersTab[j]->pawns[i]->inFinal == 0){
+	for (int i = 0; i < 40; i++) {
+
+		cout << pawnsOnTabs[i] << " | ";
+	}
+	cout << endl;
+	for (int i = 0; i < 41; i++) {
+		cout << fields[i] << " | ";
+	}
+	//*/
+
+	for (int i = 0; i < 40; i++) {
+
+		playersOnTabs[i] = 9;
+		pawnsOnTabs[i] = 9;
+	}
+
+	for (int j = 0; j < 4; j++) {
+
+		for (int i = 0; i < 4; i++) {
+
+			if (playersTab[j]->pawns[i]->inBase == 0 && playersTab[j]->pawns[i]->inFinal == 0) {
 
 				playersOnTabs[playersTab[j]->pawns[i]->position] = playersTab[j]->id;
 				pawnsOnTabs[playersTab[j]->pawns[i]->position] = i;
 			}
 		}
 	}
-
+	bool take = false;
 	int x;
 	int y;
 
@@ -1374,27 +1378,28 @@ void turn(Player* player){
 	map();
 
 	if ((x != 6) && (pawnsCantMove(player, x)));  //    0 PAWNS ON BOARD	|	dice 1-5
-	else if (x == 6 && player->inBase == 4){       //    0 PAWNS ON BOARD	|	dice 6
-	
-		if(fields[player->start] != '8'){
+	else if (x == 6 && player->inBase == 4) {       //    0 PAWNS ON BOARD	|	dice 6
+
+		if (fields[player->start] != '8') {
 
 			player->inBase = player->inBase - 1;
 			(player->pawns[0])->inBase = 0;
 			(player->pawns[0])->position = player->start;
-			if (playersOnTabs[player->start] != 9 && playersOnTabs[player->start] != player->id){
+			if (playersOnTabs[player->start] != 9 && playersOnTabs[player->start] != player->id) {
 
 				playersTab[playersOnTabs[player->start]]->pawns[pawnsOnTabs[player->start]]->inBase = 1;
 				playersTab[playersOnTabs[player->start]]->pawns[pawnsOnTabs[player->start]]->position = -1;
 				playersTab[playersOnTabs[player->start]]->inBase++;
+				take = true;
 			}
 			fields[player->start] = 'O';
 		}
 	}
-	else if ((x == 6 && player->inBase > 0 && fields[player->start] != '8')){    //    1-4 PAWNS ON BOARD	|	dice 6	|	free starting position
+	else if ((x == 6 && player->inBase > 0 && fields[player->start] != '8')) {    //    1-4 PAWNS ON BOARD	|	dice 6	|	free starting position
 
 		header(player);
-		if (pawnsCantMove(player,x))
-		y = 1;
+		if (pawnsCantMove(player, x))
+			y = 1;
 		else {
 
 			int line = 1;
@@ -1403,27 +1408,37 @@ void turn(Player* player){
 			do {
 				system("cls");
 				map();
-			
-					if (line == 1) {
 
-						SetConsoleTextAttribute(color, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY | 0);
-						cout << "leave base (1)" << endl;
-					}
-					else {
-						grayBackground(color);
-						cout << "leave base (1)" << endl;
-					}
-
-					if (line == 2) {
-
-						SetConsoleTextAttribute(color, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY | 0);
-						cout << "move pawn (2)" << endl;
-					}
-					else {
-						grayBackground(color);
-						cout << "move pawn (2)" << endl;
-					}
+				if (line == 1) {
+					cout << "  ";
+					if (player->id == 0)SetConsoleTextAttribute(color, 0 | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN);
+					else if (player->id == 1)SetConsoleTextAttribute(color, 0 | BACKGROUND_RED | BACKGROUND_INTENSITY);
+					else if (player->id == 2)SetConsoleTextAttribute(color, 0 | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+					else SetConsoleTextAttribute(color, 0 | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+					cout << "LEAVE BASE";
 					grayBackground(color);
+					cout << "  <--" << endl;
+				}
+				else {
+					grayBackground(color);
+					cout << "LEAVE BASE" << endl;
+				}
+
+				if (line == 2) {
+					cout << "  ";
+					if (player->id == 0)SetConsoleTextAttribute(color, 0 | BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN);
+					else if (player->id == 1)SetConsoleTextAttribute(color, 0 | BACKGROUND_RED | BACKGROUND_INTENSITY);
+					else if (player->id == 2)SetConsoleTextAttribute(color, 0 | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+					else SetConsoleTextAttribute(color, 0 | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+					cout << "MOVE PAWN";
+					grayBackground(color);
+					cout << "  <--" << endl;
+				}
+				else {
+					grayBackground(color);
+					cout << "MOVE PAWN" << endl;
+				}
+				grayBackground(color);
 
 				chose = _getch();
 
@@ -1455,40 +1470,51 @@ void turn(Player* player){
 			} while (chose != 13 && chose != 32);
 		}
 
-		if (fields[player->start] == ' ' && y == 1){
-
-			player->inBase = player->inBase - 1;
-			(player->pawns[3 - player->inBase])->inBase = 0;
-			(player->pawns[3 - player->inBase])->position = player->start;
-			fields[player->start] = 'O';
+		int whichpawn;
+		for (int i = 0; i < 4; i++) {
+			if ((player->pawns[i])->inBase == 1)
+				whichpawn = i;
 		}
 
-		else if (fields[player->start] == 'O' && y == 1){
+		if (fields[player->start] == ' ' && y == 1) {
 
 			player->inBase = player->inBase - 1;
-			(player->pawns[3-player->inBase])->inBase = 0;
-			(player->pawns[3-player->inBase])->position = player->start;
+			(player->pawns[whichpawn])->inBase = 0;
+			(player->pawns[whichpawn])->position = player->start;
+			fields[player->start] = 'O';
+			_getch();
+		}
 
-			if (playersOnTabs[player->start] != 9 && playersOnTabs[player->start] != player->id){
+		else if (fields[player->start] == 'O' && y == 1) {
+
+			player->inBase = player->inBase - 1;
+			(player->pawns[whichpawn])->inBase = 0;
+			(player->pawns[whichpawn])->position = player->start;
+
+			if (playersOnTabs[player->start] != 9 && playersOnTabs[player->start] != player->id) {
 
 				playersTab[playersOnTabs[player->start]]->pawns[pawnsOnTabs[player->start]]->inBase = 1;
 				playersTab[playersOnTabs[player->start]]->pawns[pawnsOnTabs[player->start]]->position = -1;
 				playersTab[playersOnTabs[player->start]]->inBase++;
 				fields[player->start] = 'O';
+				take = true;
+				_getch();
 
-			}else fields[player->start] = '8';
-			
+			}
+			else fields[player->start] = '8';
+
 		}
 
-		else if (y == 2){
+		else if (y == 2) {
 			int which_pawn = print_active(player, x);
-			move_pawn(player, which_pawn, x);
+			if (move_pawn(player, which_pawn, x))
+				take = true;
 		}
 
 	}
-	else if (player->inBase == 3){																					//    1 PAWN ON BOARD	|	dice 1-5
+	else if (player->inBase == 3) {																					//    1 PAWN ON BOARD	|	dice 1-5
 
-		int which_pawn =4;
+		int which_pawn = 4;
 		if ((player->pawns[0])->inBase == 0)
 			which_pawn = 0;
 		else if ((player->pawns[1])->inBase == 0)
@@ -1497,21 +1523,35 @@ void turn(Player* player){
 			which_pawn = 2;
 		else if ((player->pawns[3])->inBase == 0)
 			which_pawn = 3;
-		if(which_pawn !=4)
-		move_pawn(player, which_pawn, x);
+		if (which_pawn != 4)
+			if (move_pawn(player, which_pawn, x))
+				take = true;
 	}
 
-	else{																												//    2-4 PAWN ON BOARD		|	dice 1-5
-	
+	else {																												//    2-4 PAWN ON BOARD		|	dice 1-5
+
 		int which_pawn = print_active(player, x);
-		if (which_pawn != 0 && which_pawn != 1 && which_pawn != 2 && which_pawn != 3){
+		if (which_pawn != 0 && which_pawn != 1 && which_pawn != 2 && which_pawn != 3) {
 
-		}else move_pawn(player, which_pawn, x);
+		}
+		else if (move_pawn(player, which_pawn, x))
+			take = true;
 	}
 
-	for (int i = 0; i < 40; i++){
+	for (int i = 0; i < 40; i++) {
 		playersOnTabs[i] = 9;
 		pawnsOnTabs[i] = 9;
+	}
+	if (take == true) return true;
+	if (x == 6) bonus_history++;
+	if (bonus_history == 3) {
+		bonus_history = 0;
+		return false;
+	}
+	else if (x == 6) return true;
+	else {
+		bonus_history = 0;
+		return false;
 	}
 }
 
@@ -1523,7 +1563,7 @@ void start(int playersNum){
 	do{
 		HANDLE color;
 		color = GetStdHandle(STD_OUTPUT_HANDLE);
-
+		bool bonus = false;
 		map();
 
 		if (playersNum == 2){
@@ -1544,26 +1584,29 @@ void start(int playersNum){
 		while ((!((red.ended == 1 && blue.ended == 1 && green.ended == 1) || (red.ended == 1 && blue.ended == 1 && yellow.ended == 1) || (red.ended == 1 && green.ended == 1 && yellow.ended == 1) || (blue.ended == 1 && green.ended == 1 && yellow.ended == 1)))&& exit == 0) {
 		
 			if (red.ended == 0){
-
-				fillDice(0, diceTab);
-				playerTurn = 0;
-				_getch();
-				map();
-				turn(&red);
-				map();
-				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
-				cout << "\nEND TURN";
-				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
-				cout << "\npress any key...";
-				_getch();
+				do {
+					bonus = false;
+					fillDice(0, diceTab);
+					playerTurn = 0;
+					map();
+					if (turn(&red)) bonus==true;
+					map();
+					SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
+					cout << "\nEND TURN";
+					SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
+					cout << "\npress any key...";
+					_getch();
+				} while (bonus);
 			}
 
 			if (blue.ended == 0){
 
+				do {
+					bonus = false;
 				fillDice(0, diceTab);
 				playerTurn = 1;
 				map();
-				turn(&blue);
+				if (turn(&blue)) bonus == true;
 				map();
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 
@@ -1571,41 +1614,50 @@ void start(int playersNum){
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 				cout << "\npress any key...";
 				_getch();
+				} while (bonus);
 			}
 
 			if (green.ended == 0 && playersNum > 2){
 
+				do {
+					bonus = false;
 				fillDice(0, diceTab);
 				playerTurn = 2;
 				map();
-				turn(&green);
+				if (turn(&green)) bonus == true;
 				map();
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 				cout << "\nEND TURN";
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 				cout << "\npress any key...";
 				_getch();
+				} while (bonus);
 			}
 
 			if (yellow.ended == 0 && playersNum == 4){
 
+				do {
+					bonus = false;
 				fillDice(0, diceTab);
 				playerTurn = 3;
 				map();
-				turn(&yellow);
+				if (turn(&yellow)) bonus == true;
 				map();
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 				cout << "\nEND TURN";
 				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 				cout << "\npress any key...";
-				if (_getch() == 27){
-
-					SetConsoleTextAttribute(color, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY | 0);
-					cout << "\nYOU WANT TO QUIT THE GAME? Y/N";
-					if (_getch() == 121) exit = 1;
-				};
+				_getch();
+				} while (bonus);
+				//if (_getch() == 27){
+				//
+				//	SetConsoleTextAttribute(color, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY | 0);
+				//	cout << "\nYOU WANT TO QUIT THE GAME? Y/N";
+				//	if (_getch() == 121) exit = 1;
+				//};
 			}
 		}
 		map(); cout << "koniec";
+		exit == 1;
 	} while (exit == 0);
 }

@@ -1,8 +1,6 @@
 #ifndef pawn_h
 #define pawn_h
-#pragma once
-class Pawn
-{
+class Pawn{
 public:
 	int position;
 	bool inBase;

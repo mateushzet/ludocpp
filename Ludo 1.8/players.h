@@ -1,9 +1,7 @@
 #include "pawn.h"
 #ifndef players_h
 #define players_h
-#pragma once
-class Player
-{
+class Player{
 public:
 	int id;
 	int inBase;
